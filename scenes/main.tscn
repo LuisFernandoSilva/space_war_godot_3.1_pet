@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/main.gd" type="Script" id=1]
+[ext_resource path="res://textures/backgrounds/logo.png" type="Texture" id=2]
+[ext_resource path="res://textures/buttons_sprites/button_play.png" type="Texture" id=3]
+[ext_resource path="res://textures/buttons_sprites/button_play_selected.png" type="Texture" id=4]
+[ext_resource path="res://fonts/kenvector_future.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 5 )
+
+[node name="main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="bg" type="Sprite" parent="."]
+scale = Vector2( 1.60286, 1.19685 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="play_button" type="TextureButton" parent="."]
+margin_left = 338.34
+margin_top = 416.261
+margin_right = 438.34
+margin_bottom = 516.261
+action_mode = 0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+
+[node name="hiScore" type="Label" parent="."]
+margin_left = 296.565
+margin_top = 502.248
+margin_right = 481.565
+margin_bottom = 537.248
+custom_fonts/font = SubResource( 1 )
+text = "Hi-Score"
+
+[node name="points" type="Label" parent="hiScore"]
+margin_left = 64.211
+margin_top = 44.21
+margin_right = 104.211
+margin_bottom = 67.21
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 1
+autowrap = true
+
+[connection signal="pressed" from="play_button" to="." method="_on_play_button_pressed"]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/laser.tscn" type="PackedScene" id=1]
+[ext_resource path="res://textures/laser_sprites/laser_enemy.png" type="Texture" id=2]
+
+[node name="laser_enemy" groups=[
+"enemy_laser",
+] instance=ExtResource( 1 )]
+velocity = Vector2( 0, 400 )
+
+[node name="sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+

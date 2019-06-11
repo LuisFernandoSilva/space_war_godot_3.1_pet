@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://textures/backgrounds/background.png" type="Texture" id=1]
+[ext_resource path="res://scenes/star_moving.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fonts/kenvector_future.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scripts/score.gd" type="Script" id=4]
+[ext_resource path="res://scripts/bar_life.gd" type="Script" id=5]
+[ext_resource path="res://textures/boards.png" type="Texture" id=6]
+[ext_resource path="res://textures/markers.png" type="Texture" id=7]
+[ext_resource path="res://scenes/hero_ship.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/spawn_enemy.tscn" type="PackedScene" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 3 )
+
+[node name="game" type="Node2D"]
+pause_mode = 1
+z_index = 1
+
+[node name="bg" type="Sprite" parent="."]
+z_as_relative = false
+texture = ExtResource( 1 )
+centered = false
+
+[node name="star_moving" parent="." instance=ExtResource( 2 )]
+z_as_relative = false
+
+[node name="score" type="Label" parent="."]
+margin_left = 17.1837
+margin_top = 14.3197
+margin_right = 109.184
+margin_bottom = 37.3197
+custom_fonts/font = SubResource( 1 )
+text = "Score:"
+script = ExtResource( 4 )
+
+[node name="points" type="Label" parent="score"]
+margin_left = 113.126
+margin_top = 1.43197
+margin_right = 153.126
+margin_bottom = 24.432
+custom_fonts/font = SubResource( 2 )
+text = "0"
+autowrap = true
+
+[node name="life" type="Label" parent="."]
+editor/display_folded = true
+margin_left = 534.126
+margin_top = 18.6156
+margin_right = 599.126
+margin_bottom = 41.6156
+custom_fonts/font = SubResource( 3 )
+text = "Life:"
+
+[node name="bar_life" type="Node2D" parent="life"]
+position = Vector2( 163.245, 11.4558 )
+script = ExtResource( 5 )
+
+[node name="boards" type="Sprite" parent="life/bar_life"]
+texture = ExtResource( 6 )
+
+[node name="markers" type="Sprite" parent="life/bar_life"]
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 188, 23 )
+
+[node name="hero_ship" parent="." instance=ExtResource( 8 )]
+position = Vector2( 412.984, 535.173 )
+
+[node name="spawn_enemy" parent="." instance=ExtResource( 9 )]
+
+[connection signal="lose" from="life/bar_life" to="hero_ship" method="_on_bar_life_lose"]
